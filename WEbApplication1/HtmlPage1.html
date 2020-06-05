@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Simple Map Sample</title>
+    <meta charset="utf-8">
+    <style>
+        /* マップを表示する div 要素の高さを必ず明示的に指定します。 */
+        #sample {
+            height: 1600px;
+            width: 100%;
+        }
+
+        /*#map_canvas {
+            width: 600px;
+            height: 400px;
+        }*/
+    </style>
+
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=rZhYCPrg7zD7Z3nLdVfYlnaB1X88jXl2"></script>
+    <script type="text/javascript">
+        // 百度地图API功能
+        var sContent =	var sContent =
+            "<h4 style='margin:0 0 5px 0;padding:0.2em 0'>天安门</h4>" +
+            "<img style='float:right;margin:4px' id='imgDemo' src='img/1.jpg' width='139' height='104' title='天安门'/>" +
+            "<p style='margin:0;line-height:1.5;font-size:13px;text-indent:2em'>天安门坐落在中国北京市中心,故宫的南侧,与天安门广场隔长安街相望,是清朝皇城的大门...</p>" +
+            "</div>";
+        var map = new BMap.Map("sample");
+        var point = new BMap.Point(116.404, 39.915);
+        var marker = new BMap.Marker(point);
+        var infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+        map.centerAndZoom(point, 15);
+        map.addOverlay(marker);
+        marker.addEventListener("click", function () {
+            this.openInfoWindow(infoWindow);
+            //图片加载完毕重绘infowindow
+            document.getElementById('imgDemo').onload = function () {
+                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+            }
+        });
+
+
+        //var map;
+        //var marker = [];
+        //var infoWindow = [];
+        //var markerData = [ // マーカーを立てる場所名・緯度・経度
+        //    {
+        //        name: "<img src='img/1.jpg' /> <br><a href='https://www.baidu.com/' target='_blank'>タイトル01</a>",
+        //        lat: 35.6954806,
+        //        lng: 139.76325010000005
+        //        //icon: 'tam.png' // TAM 東京のマーカーだけイメージを変更する
+        //    }, {
+        //        name: "<img src='img/1.jpg' /> <br><a href='https://www.baidu.com/' target='_blank'>タイトル01</a>",
+        //        lat: 35.6951212,
+        //        lng: 139.76610649999998
+        //    }, {
+        //        name: "<img src='img/1.jpg' /> <br><a href='https://www.baidu.com/' target='_blank'>タイトル01</a>",
+        //        lat: 35.69496,
+        //        lng: 139.76746000000003
+        //    }, {
+        //        name: "<img src='img/1.jpg' /> <br><a href='https://www.baidu.com/' target='_blank'>タイトル01</a>",
+        //        lat: 35.6993529,
+        //        lng: 139.76526949999993
+        //    }, {
+        //        name: '神保町駅',
+        //        lat: 35.695932,
+        //        lng: 139.75762699999996
+        //    }, {
+        //        name: '新御茶ノ水駅',
+        //        lat: 35.696932,
+        //        lng: 139.76543200000003
+        //    }
+        //];
+
+        //function initMap() {
+        //    // 地図の作成
+        //    var mapLatLng = new BMap.maps.LatLng({ lat: markerData[0]['lat'], lng: markerData[0]['lng'] }); // 緯度経度のデータ作成
+        //    map = new BMap.maps.Map(document.getElementById('sample'), { // #sampleに地図を埋め込む
+        //        center: mapLatLng, // 地図の中心を指定
+        //        zoom: 17 // 地図のズームを指定
+        //    });
+
+        //    // マーカー毎の処理
+        //    for (var i = 0; i < markerData.length; i++) {
+        //        markerLatLng = new BMap.maps.LatLng({ lat: markerData[i]['lat'], lng: markerData[i]['lng'] }); // 緯度経度のデータ作成
+        //        marker[i] = new BMap.maps.Marker({ // マーカーの追加
+        //            position: markerLatLng, // マーカーを立てる位置を指定
+        //            map: map // マーカーを立てる地図を指定
+        //        });
+
+        //        infoWindow[i] = new BMap.maps.InfoWindow({ // 吹き出しの追加
+        //            content:  markerData[i]['name'] // 吹き出しに表示する内容
+        //        });
+
+        //        markerEvent(i); // マーカーにクリックイベントを追加
+        //    }
+
+        //    //marker[0].setOptions({// TAM 東京のマーカーのオプション設定
+        //    //    icon: {
+        //    //        url: markerData[0]['icon']// マーカーの画像を変更
+        //    //    }
+        //    //});
+        //}
+
+        //// マーカーにクリックイベントを追加
+        //function markerEvent(i) {
+        //    marker[i].addListener('click', function () { // マーカーをクリックしたとき
+        //        infoWindow[i].open(map, marker[i]); // 吹き出しの表示
+        //    });
+        //}
+
+
+
+        //var map;
+        //function initMap() {
+        //    map = new google.maps.Map(document.getElementById('map'), {
+        //        center: { lat: -34.397, lng: 150.644 },
+        //        zoom: 8
+        //    });
+        //}
+
+
+        //var map = null;
+        //var infowindow = new google.maps.InfoWindow();
+        //var gmarkers = [];
+        //var i = 0;
+
+        //function inicializar() {
+        //    // 初期設定
+        //    var option = {
+        //        // ズームレベル
+        //        zoom: 12,
+        //        // 中心座標
+        //        center: new google.maps.LatLng(35.1683085, 136.9072405),
+        //        // タイプ (ROADMAP・SATELLITE・TERRAIN・HYBRIDから選択)
+        //        mapTypeId: google.maps.MapTypeId.ROADMAP
+        //    };
+        //    map = new google.maps.Map(document.getElementById("map_canvas"), option);
+        //    google.maps.event.addListener(map, "click", function () { infowindow.close(); });
+
+        //    // ポイントの追加
+        //    var point = new google.maps.LatLng(35.1676114, 136.904148);
+        //    var marker = create_maker(point, "info", "<img src='img/2.jpg' /><br><a href='https://www.baidu.com/' target='_blank'>タイトル01</a>");
+
+        //    var point = new google.maps.LatLng(35.1675021, 136.8906085);
+        //    var marker = create_maker(point, "info", "<img src='img/1.jpg' /><br><a href='https://www.baidu.com/' target='_blank'>タイトル02</a>");
+
+        //    var point = new google.maps.LatLng(35.1727874, 136.8852535);
+        //    var marker = create_maker(point, "info", "<img src='img/6.jpg' /><br><a href='https://www.baidu.com/' target='_blank'>タイトル03</a>");
+        //}
+
+        //function create_maker(latlng, label, html) {
+        //    // マーカーを生成
+        //    var marker = new google.maps.Marker({ position: latlng, map: map, title: label });
+        //    // マーカーをクリックした時の処理
+        //    google.maps.event.addListener(marker, "click", function () {
+        //        infowindow.setContent(html);
+        //        infowindow.open(map, marker);
+        //    });
+        //    gmarkers[i] = marker;
+        //    i++;
+        //    return marker;
+        //}
+
+        //function map_click(i) {
+        //    google.maps.event.trigger(gmarkers[i], "click");
+        //}
+
+        //google.maps.event.addDomListener(window, "load", inicializar);
+    </script>
+
+
+</head>
+
+<body>
+    <!--<div id="map_canvas"></div>
+    <ul>
+        <li><a href="javascript:map_click(0)">タイトル01</a></li>
+        <li><a href="javascript:map_click(1)">タイトル02</a></li>
+        <li><a href="javascript:map_click(2)">タイトル03</a></li>
+    </ul>-->
+    <div id="sample"></div><!-- 地図を表示する div 要素（id="map"）-->
+
+</body>
+</html>
