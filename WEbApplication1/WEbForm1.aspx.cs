@@ -26,10 +26,10 @@ namespace WEbApplication1
         public int count = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-             ip = Request.UserHostAddress;
-             ConnectionStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-             con = new SqlConnection(ConnectionStr);
-             con.Open();
+            ip = Request.UserHostAddress;
+            ConnectionStr = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+            con = new SqlConnection(ConnectionStr);
+            con.Open();
 
             //此ip有几条记录？
             string checkIp = "select count(*) from oiwai where ip = '" + ip + "'";
@@ -43,16 +43,19 @@ namespace WEbApplication1
             Repeater1.DataSource = dt;
             Repeater1.DataBind();
         }
-        
-       public void delete(object sender, EventArgs e)
-       {
+
+        //管理者画面へ行く（祝福言葉を削除）
+        public void delete(object sender, EventArgs e)
+        {
             Response.Write("<script language=javascript>");
             Response.Write("var password;");
             Response.Write("password = prompt('请输入密码（PassWordを入力してください）: ', '');");
             Response.Write("if(password == '890227'){location.href='d_eleteP_age.aspx';}else{location.href='WEbForm1.aspx';};");
             Response.Write("</script>");
         }
-       public void cal_DayRender(Object sender, DayRenderEventArgs e)
+
+        //カレンダー背景初期化、その日の記録があれば背景をピンク色
+        public void cal_DayRender(Object sender, DayRenderEventArgs e)
         {
             string date = e.Day.Date.ToString("yyyy/MM/dd");
             date = date.Substring(0, 10);
@@ -67,8 +70,10 @@ namespace WEbApplication1
             cellColorReader.Close();
 
         }
-            public void cal_Changed(object sender, EventArgs e)
-        { 
+
+        //カレンダーで選択された日付の記録を表示する
+        public void cal_Changed(object sender, EventArgs e)
+        {
             string date = Calendar1.SelectedDate.ToString("yyyy/MM/dd");
             date = date.Substring(0, 10);
             date = date.Replace("/", "");
@@ -80,9 +85,7 @@ namespace WEbApplication1
             SqlDataReader sdr = com.ExecuteReader();
             if (sdr.Read() == true)
             {
-               this.labelCalender.Text = sdr["text"].ToString();
-
-
+                this.labelCalender.Text = sdr["text"].ToString();
             }
             else
             {
@@ -91,6 +94,8 @@ namespace WEbApplication1
             sdr.Close();
             com.Dispose();
         }
+
+        //カレンダーに記録を書き込み
         public void BtInsert(object sender, EventArgs e)
         {
             HtmlTextArea mem = (HtmlTextArea)(form1.FindControl("textarea2"));
@@ -101,33 +106,35 @@ namespace WEbApplication1
             com = new SqlCommand(existCheck, con);
             SqlDataReader reader = com.ExecuteReader();
 
-            if (reader.HasRows) {
+            if (reader.HasRows)
+            {
                 reader.Close();
-                string sqlUpdate = "update test1 set text = N'" + mem.Value +"' where date = '" + date +"'" ;
+                string sqlUpdate = "update test1 set text = N'" + mem.Value + "' where date = '" + date + "'";
                 com = new SqlCommand(sqlUpdate, con);
                 com.ExecuteNonQuery();
-                
+
                 com.Dispose();
             }
-            else {
+            else
+            {
                 reader.Close();
-                string sqlInsert = "insert into test1 (date, text) values ( "+ "'" + date + "' , N'" + mem.Value + "')";
+                string sqlInsert = "insert into test1 (date, text) values ( " + "'" + date + "' , N'" + mem.Value + "')";
                 com = new SqlCommand(sqlInsert, con);
                 com.ExecuteNonQuery();
-                
+
                 com.Dispose();
             }
-            
+
         }
 
-
+        //祝福挿入
         public void BtInsertOiwai(object sender, EventArgs e)
         {
 
             HtmlTextArea mem = (HtmlTextArea)(form1.FindControl("textareaOiwai"));
-            if (this.name.Text.ToString() != "" && this.name.Text.Length<=10 && mem.Value.Length<=45 )
+            if (this.name.Text.ToString() != "" && this.name.Text.Length <= 10 && mem.Value.Length <= 45)
             {
-                //此ip有几条记录？
+                //one user 5 message
                 string checkIp = "select count(*) from oiwai where ip = '" + ip + "'";
                 com = new SqlCommand(checkIp, con);
                 count = (int)com.ExecuteScalar();
@@ -140,7 +147,7 @@ namespace WEbApplication1
                 }
                 else
                 {
-      
+
                 }
                 //Response.Redirect(Request.Url.ToString());
 
@@ -150,7 +157,7 @@ namespace WEbApplication1
                 ad.Fill(dt);
                 Repeater1.DataSource = dt;
                 Repeater1.DataBind();
-                
+
                 ScriptManager.RegisterStartupScript(UpdatePanel1, this.Page.GetType(), "", "CsharpUse();", true);
 
             }

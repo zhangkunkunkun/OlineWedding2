@@ -7,35 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <style>
-        /*#imgShow{
-	    width:650px;
-	    height:650px;
-        position:relative;
-        margin-left:80px;
-        
-    }
-        #imgDiv{
-	    width:650px;
-	    height:650px;
-        position:relative;
-        border:dotted;
-        
-    }*/
-      /*.show{
-        display: inline-block;}
-  .hide {
-        display: none;
-       
-  }*/
-    /*.img{
-        width:300px;
-        height:650px;
 
-    }*/
     input.ipt1{width:100px;height:24px;border-radius:10px;}
     input.btn1{border-radius:50%;}
     .ipt2{width:300px;height:72px;border-radius:10px;}
-    /*input.name{border-radius:10px;}*/
     .oiwaiWord{
         font-size:25px;
     }
@@ -80,12 +55,6 @@
             100%{ text-shadow: 0 0 4px #4cc134}  
 	}
 
-
-
-
-
-
-
     :root {
 	/* Base font size */
 	font-size: 15px;
@@ -104,11 +73,6 @@ html, body{
 	margin: 0;
 	padding: 0;
 	overflow:visible;
-    /*font-family: "Montserrat", Arial, sans-serif;
-	font-weight: 500;
-	line-height: 1.5;
-	min-height: 100vh;
-	padding: 4rem 2rem;*/
 	color:white;
 	background-color:black ;
 }
@@ -117,17 +81,6 @@ html, body{
 	height: auto;
 
 }
-
-/*body {
-	font-family: "Montserrat", Arial, sans-serif;
-	font-weight: 500;
-	line-height: 1.5;
-	min-height: 100vh;
-	padding: 4rem 2rem;
-	color:black;
-	background-color:burlywood;
-}*/
-
 
 .container1 {
    
@@ -152,21 +105,10 @@ html, body{
 .cube-face-image {
 	display:block;
 	position:absolute;
-	/* opacity: 0.95; */
-	/* border: 0.2rem solid #fafafa; */
 	box-shadow: 0 0 0.5rem #fff, 
 				0 0 1.5rem var(--border-color),
 				0 0 3rem var(--border-color);
 }
-
-/*.image-buttons {
-    
-	display: grid;
-	grid-template-columns: repeat(6, auto);
-	grid-gap: 2.5rem;
-	justify-content: center;
-    
-}*/
 
 .image-buttons input {
 	border: 0.2rem solid #fafafa;
@@ -238,39 +180,20 @@ html, body{
 	.image-buttons input{width:104px}
 
 </style>
-    <title>张坤・堵时雨（チョウ・ト）WEB Wedding </title>
+    <title>张坤・堵时雨（チョウ・ト）Online Wedding </title>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-   
-
- 
 
     window.onload = function () {
         window.dv_num;
         window.Count;
         window.oneTime = 1;
         Count = <%=count %>;
-                var word = ""
-                while (word != "1005") {
-                    word = prompt("请输入密码（暗証番号を入力してください）", "");
-                }
-                //document.getElementById("form1").style.display=""
-                //window.x = -1;
-                //window.img = document.getElementsByTagName("img");
-                //window.l = img.length;
-                //setInterval(function () {
-                //        x++;
-                //        if (x == l) {
-                //            x = 0;
-                //        }
-               
-                //        var path = document.getElementById("img" + x).src;
-                //        var div = document.getElementById("imgDiv");
-                //        div.style.background = "url(" + path + ")";
- 
-            
-                //}, 4000);
+                //var word = ""
+                //while (word != "1005") {
+                //    word = prompt("请输入密码（暗証番号を入力してください）", "");
+                //}
         
         setInterval(function () {
             var borswer = window.navigator.userAgent.toLowerCase();
@@ -299,28 +222,6 @@ html, body{
          
 
      }
-    //    function up() {
-
-    //     x = x-1;
-    //     if (x == -1) {
-    //            x = 0;
-    //        }
-    //     var pathUp = document.getElementById("img" + x).src;
-    //     var divUp = document.getElementById("imgDiv");
-    //     divUp.style.background = "url(" + pathUp + ")";
-    //     return false;
-    //    }
-    //function dowm() {
-    //    x = x + 1;
-    //    if(x==l)    
-    //    {x=0;}
-    //         var pathDown = document.getElementById("img" + x).src;
-    //     var divDown = document.getElementById("imgDiv");
-    //     divDown.style.background = "url(" + pathDown + ")";
-    //    return false;
-    //}
-
-    
 
     function changeUp() {
         document.getElementById("change1").style.height = '30rem';
@@ -378,7 +279,7 @@ html, body{
         }            
     }  
     
-    //   //DOM load event
+    //DOM load event
     window.addEventListener("DOMContentLoaded", () => {
 		 const cube = document.querySelector(".cube"),
 		      imageButtons = document.querySelector(".image-buttons");
@@ -407,9 +308,6 @@ html, body{
 		
          }, false);
     }, false);
-
-
-
 
 $(function(){
     dv_num = 0; 
@@ -448,7 +346,6 @@ var RENDERER = {
 		this.dynamicParticles.length = 0;
 		this.resizeIds.length = 0;
 		this.width = this.$container.width();
-        //this.height = this.$container.height();
         this.height = dv_num * 65;
         this.interval = this.getRandomValue(150, 300);
         this.$canvas.attr({ width: this.width, height: this.height });
